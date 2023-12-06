@@ -33,11 +33,12 @@ std::vector<std::vector<int>> readGraph(char *filePath, int vertexCount)
             for (int i = 0; i < vertexCount; i++)
             {
                 file >> next;
-                file >> comma;
-               
-                vertex.push_back(next);
+                comma = file.peek();
 
-                std::cout << " n: " << next << " c: " << comma;
+                if (',' == comma)
+                    file >> comma;
+
+                vertex.push_back(next);
             }
             graph.push_back(vertex);
             vertex.clear();
@@ -58,12 +59,11 @@ std::vector<std::vector<int>> readGraph(char *filePath, int vertexCount)
 
 void printGraph(std::vector<std::vector<int>> graph)
 {
-    std::cout << "\n";
     for (std::vector<int> vertex : graph)
     {
         for (int i = 0; i < vertex.size() - 1; i++)
         {
-            std::cout << i << ", ";
+            std::cout << vertex[i] << ", ";
         }
         std::cout << vertex[vertex.size() - 1] << "\n";
     }
