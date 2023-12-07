@@ -1,0 +1,3 @@
+(FN) Find minimum distance to next vertex
+(FN) Add vector of next vertex to the valid vertices list
+(FN) Remove all edges to current vertex
