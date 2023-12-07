@@ -2,7 +2,6 @@
 #include <fstream>
 #include <vector>
 
-
 /**
  * Read graph from the provided filePath with vertexCount vertices
  * @param filePath path of the file to be read from
@@ -40,7 +39,7 @@ std::vector<std::vector<int>> readGraph(char *filePath, int vertexCount)
     }
     else
     {
-        std::cout << "File not found, exiting";
+        std::cout << "File not found, exiting...";
         file.close();
 
         exit(1);
