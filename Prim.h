@@ -2,12 +2,21 @@
 
 struct edge
 {
-    int weight, parentVertex;
+    int weight, parentVertex, nextVertex;
 };
+
+void printEdge(edge *edge)
+{
+    std::cout << "parent: " << edge->parentVertex
+              << "weight: " << edge->weight
+              << "next: " << edge->nextVertex
+              << "\n";
+}
 
 std::vector<std::vector<int>> prim(std::vector<std::vector<int>> graph, int vertexCount)
 {
     std::vector<std::vector<int>> validVertices;
+    validVertices.push_back(graph[0]);
 
     for (int i = 0; i < vertexCount; i++)
     {
@@ -18,7 +27,7 @@ std::vector<std::vector<int>> prim(std::vector<std::vector<int>> graph, int vert
 
 edge minDistance(std::vector<std::vector<int>> validVertices)
 {
-    edge shortest = {0,0};
+    edge shortest = {0, 0, 0};
     for (int v = 0; v < validVertices.size(); v++)
     {
         for (int e = 0; e < validVertices[v].size(); e++)
@@ -27,6 +36,7 @@ edge minDistance(std::vector<std::vector<int>> validVertices)
             {
                 shortest.weight = validVertices[v][e];
                 shortest.parentVertex = v;
+                shortest.nextVertex = e;
             }
         }
     }
