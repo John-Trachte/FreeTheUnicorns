@@ -23,6 +23,13 @@ std::vector<std::vector<int>> prim(std::vector<std::vector<int>> graph, int vert
         std::vector<int> vertex = {0};
         validVertices.push_back(vertex);
     }
+
+    edge shortest = minDistance(validVertices);
+    while (shortest.weight != 0)
+    {
+        
+        shortest = minDistance(validVertices);
+    }
 }
 
 edge minDistance(std::vector<std::vector<int>> validVertices)
