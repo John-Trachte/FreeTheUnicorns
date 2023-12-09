@@ -1,35 +1,76 @@
+#include <queue>
 #include <vector>
+#include <functional>
 
 struct edge
 {
     int weight, parentVertex, nextVertex;
+
+    bool operator>(const edge *rhs)
+    {
+        return (weight > rhs->weight);
+    }
+};
+
+// https://medium.com/@taohidulii/min-priority-queue-in-c-7e64bd01359c
+struct edgeComparison
+{
+    bool operator()(const edge &a, const edge &b)
+    {
+        return (a.weight < b.weight);
+    }
 };
 
 void printEdge(edge *edge)
 {
     std::cout << "parent: " << edge->parentVertex
-              << "weight: " << edge->weight
-              << "next: " << edge->nextVertex
+              << " weight: " << edge->weight
+              << " next: " << edge->nextVertex
               << "\n";
+}
+
+void printQueue(std::priority_queue<edge, std::vector<edge>, edgeComparison> minQueue)
+{
+    std::vector<edge> storage;
+    edge temp;
+
+    while (!(minQueue.empty()))
+    {
+        temp = minQueue.top();
+        storage.push_back(temp);
+        minQueue.pop();
+        printEdge(&temp);
+    }
+
+    for (edge curr : storage)
+        minQueue.push(curr);
 }
 
 std::vector<std::vector<int>> prim(std::vector<std::vector<int>> graph, int vertexCount)
 {
-    std::vector<std::vector<int>> validVertices;
-    validVertices.push_back(graph[0]);
+    std::priority_queue<edge, std::vector<edge>, edgeComparison> minQueue;
 
-    for (int i = 0; i < vertexCount; i++)
-    {
-        std::vector<int> vertex = {0};
-        validVertices.push_back(vertex);
-    }
+    edge first = {
+        10, 0, 3};
 
-    edge shortest = minDistance(validVertices);
-    while (shortest.weight != 0)
-    {
-        
-        shortest = minDistance(validVertices);
-    }
+    edge second = {
+        11, 0, 3};
+
+    edge third = {
+        12, 0, 3};
+
+    minQueue.push(first);
+    minQueue.push(second);
+    minQueue.push(third);
+
+    printQueue(minQueue);
+
+    exit(1);
+}
+
+std::vector<edge> toEdges(std::vector<int> vertex)
+{
+    std::vector<edge> edges;
 }
 
 edge minDistance(std::vector<std::vector<int>> validVertices)

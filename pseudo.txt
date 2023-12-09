@@ -1,3 +1,6 @@
-X (FN) Find minimum distance to next vertex
-  (FN) Add vector of next vertex to the valid vertices list
-  (FN) Remove all edges to current vertex
+X create a minQueue
+  add vertex to a queue
+  select a vertex
+  if that vertex isn't part of the tree,
+    add edge to mst
+    add its next vertex to queue
