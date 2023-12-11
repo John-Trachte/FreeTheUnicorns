@@ -26,28 +26,28 @@ void printQueue(std::priority_queue<edge, std::vector<edge>, edgeComparison> min
 std::vector<std::vector<int>> prim(std::vector<std::vector<int>> graph, int vertexCount)
 {
     std::priority_queue<edge, std::vector<edge>, edgeComparison> minQueue;
+    
+    std::vector<edge> vertexZero = toEdges(graph[0], 0);
+    for (edge edge : vertexZero)
+        minQueue.push(edge);
 
-    edge first = {
-        10, 0, 3};
+    while (!(minQueue.empty()))
+    {
 
-    edge second = {
-        11, 0, 3};
-
-    edge third = {
-        12, 0, 3};
-
-    minQueue.push(first);
-    minQueue.push(second);
-    minQueue.push(third);
-
-    printQueue(minQueue);
-
-    exit(1);
+    }
 }
 
-std::vector<edge> toEdges(std::vector<int> vertex)
+std::vector<edge> toEdges(std::vector<int> vertex, int vertexNum)
 {
     std::vector<edge> edges;
+
+    for (int i = 0; i < vertex.size(); i++)
+    {
+        edge temp = {vertex[i], vertexNum, i};
+        edges.push_back(temp);
+    }
+
+    return edges;
 }
 
 edge minDistance(std::vector<std::vector<int>> validVertices)

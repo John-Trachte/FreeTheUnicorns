@@ -1,5 +1,5 @@
 X create a minQueue
-  convert a vertex to edges
+X convert a vertex to edges
   add vertex to a queue
   select a vertex
   if that vertex isn't part of the tree,
