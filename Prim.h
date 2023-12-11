@@ -1,33 +1,10 @@
+#ifndef PRIM_H
+#define PRIM_H
+
+#include "Edge.h"
 #include <queue>
 #include <vector>
 #include <functional>
-
-struct edge
-{
-    int weight, parentVertex, nextVertex;
-
-    bool operator>(const edge *rhs)
-    {
-        return (weight > rhs->weight);
-    }
-};
-
-// https://medium.com/@taohidulii/min-priority-queue-in-c-7e64bd01359c
-struct edgeComparison
-{
-    bool operator()(const edge &a, const edge &b)
-    {
-        return (a.weight < b.weight);
-    }
-};
-
-void printEdge(edge *edge)
-{
-    std::cout << "parent: " << edge->parentVertex
-              << " weight: " << edge->weight
-              << " next: " << edge->nextVertex
-              << "\n";
-}
 
 void printQueue(std::priority_queue<edge, std::vector<edge>, edgeComparison> minQueue)
 {
@@ -91,3 +68,5 @@ edge minDistance(std::vector<std::vector<int>> validVertices)
 
     return shortest;
 }
+
+#endif
