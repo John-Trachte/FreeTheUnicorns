@@ -8,7 +8,12 @@ struct edge
     int weight, parentVertex, nextVertex;
 };
 
-// https://medium.com/@taohidulii/min-priority-queue-in-c-7e64bd01359c
+/**
+ * Custom comparison function for struct edge to find lesser edge
+ * Based on: https://medium.com/@taohidulii/min-priority-queue-in-c-7e64bd01359c
+ * @param a edge compared against
+ * @param b edge compared with
+*/
 struct edgeComparison
 {
     bool operator()(const edge &a, const edge &b)
@@ -19,9 +24,9 @@ struct edgeComparison
 
 void printEdge(edge *edge)
 {
-    std::cout << "parent: " << edge->parentVertex
-              << " weight: " << edge->weight
-              << " next: " << edge->nextVertex
+    std::cout << "parent: " << edge->parentVertex << " "
+              << "weight: " << edge->weight << " "
+              << "next: " << edge->nextVertex
               << "\n";
 }
 

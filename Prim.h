@@ -6,6 +6,10 @@
 #include <vector>
 #include <functional>
 
+/**
+ * Print queue parameter
+ * @param minQueue queue to be printed
+*/
 void printQueue(std::priority_queue<edge, std::vector<edge>, edgeComparison> minQueue)
 {
     std::vector<edge> storage;
@@ -23,6 +27,11 @@ void printQueue(std::priority_queue<edge, std::vector<edge>, edgeComparison> min
         minQueue.push(curr);
 }
 
+/**
+ * Implement Prim's algorithm on the parameter graph with vertexCount vertices
+ * @param graph graph whose minimum spanning tree is found
+ * @param vertexCount number of vertices in @param graph
+*/
 std::vector<std::vector<int>> prim(std::vector<std::vector<int>> graph, int vertexCount)
 {
     std::priority_queue<edge, std::vector<edge>, edgeComparison> minQueue;
@@ -37,6 +46,11 @@ std::vector<std::vector<int>> prim(std::vector<std::vector<int>> graph, int vert
     }
 }
 
+/**
+ * Convert a vertex to a set of edge structs
+ * @param vertex vector of integers to be converted into edge structs
+ * @param vertexNum parentVertex of each edge struct
+*/
 std::vector<edge> toEdges(std::vector<int> vertex, int vertexNum)
 {
     std::vector<edge> edges;
@@ -50,6 +64,9 @@ std::vector<edge> toEdges(std::vector<int> vertex, int vertexNum)
     return edges;
 }
 
+/**
+ * Not currently in use
+*/
 edge minDistance(std::vector<std::vector<int>> validVertices)
 {
     edge shortest = {0, 0, 0};
