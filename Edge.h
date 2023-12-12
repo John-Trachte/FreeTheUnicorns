@@ -18,11 +18,17 @@ struct edgeComparison
 {
     bool operator()(const edge &a, const edge &b)
     {
-        return (a.weight < b.weight);
+        return (a.weight > b.weight);
     }
 };
 
-void printEdge(edge *edge)
+void printEdge(const edge *edge);
+
+/**
+ * Print an edge's data
+ * @param edge pointer to an edge struct to be printed
+*/
+void printEdge(const edge *edge)
 {
     std::cout << "parent: " << edge->parentVertex << " "
               << "weight: " << edge->weight << " "

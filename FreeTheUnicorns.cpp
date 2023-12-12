@@ -8,9 +8,9 @@ int main(int argc, char *argv[])
 
     std::vector<std::vector<int>> graph = readGraph(filePath, vertexCount);
 
-    std::vector<std::vector<int>> minSpanTree = prim(graph, vertexCount);
+    std::vector<edge> minSpanTree = prim(graph, vertexCount);
 
-    printGraph(minSpanTree);
+    printMST(minSpanTree);
 
     return 0;
 }
