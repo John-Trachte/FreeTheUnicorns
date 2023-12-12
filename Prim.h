@@ -5,7 +5,6 @@
 #include <queue>
 #include <vector>
 #include <functional>
-#include <unordered_set>
 
 void printQueue(std::priority_queue<edge, std::vector<edge>, edgeComparison> minQueue);
 
@@ -14,6 +13,8 @@ std::vector<edge> prim(std::vector<std::vector<int>> graph, int vertexCount);
 void printMST(const std::vector<edge> minSpanTree);
 
 std::vector<edge> toEdges(std::vector<int> vertex, int vertexNum);
+
+void printVisitedVertices(bool vistedVertices[], int length);
 
 /**
  * Print queue parameter
@@ -36,6 +37,13 @@ void printQueue(std::priority_queue<edge, std::vector<edge>, edgeComparison> min
         minQueue.push(curr);
 }
 
+void printVisitedVertices(bool vistedVertices[], int length)
+{
+    for (int i = 0; i < length; i++)
+        std::cout << i << ": " << vistedVertices[i] << ", ";
+    std::cout << "\n";
+}
+
 /**
  * Implement Prim's algorithm on the parameter graph with vertexCount vertices
  * @param graph graph whose minimum spanning tree is found
@@ -45,8 +53,8 @@ void printQueue(std::priority_queue<edge, std::vector<edge>, edgeComparison> min
 std::vector<edge> prim(std::vector<std::vector<int>> graph, int vertexCount)
 {
     std::vector<edge> minSpanTree;
-    // std::unordered_set<int> visitedNodes;
-    bool visitedNodes[vertexCount] = {false};
+    bool visitedVertices[vertexCount] = {false};
+    visitedVertices[0] = true;
 
     std::priority_queue<edge, std::vector<edge>, edgeComparison> minQueue;
 
@@ -57,21 +65,23 @@ std::vector<edge> prim(std::vector<std::vector<int>> graph, int vertexCount)
     edge temp;
     while (!(minQueue.empty()))
     {
+        // printVisitedVertices(visitedVertices, sizeof(visitedVertices) / sizeof(bool));
+        // printQueue(minQueue);
         temp = minQueue.top();
 
         minQueue.pop();
 
-        if (false == visitedNodes[temp.parentVertex])
+        if (false == visitedVertices[temp.nextVertex])
         {
-            visitedNodes[temp.parentVertex] = true;
+            visitedVertices[temp.nextVertex] = true;
             minSpanTree.push_back(temp);
 
             std::vector<edge> nextVertex = toEdges(graph[temp.nextVertex], temp.nextVertex);
             for (edge edge : nextVertex)
                 minQueue.push(edge);
 
-            printEdge(&temp);
-            std::cout << "\n\n";
+            // printEdge(&temp);
+            // std::cout << "\n\n";
         }
     }
 
@@ -84,13 +94,11 @@ std::vector<edge> prim(std::vector<std::vector<int>> graph, int vertexCount)
  */
 void printMST(const std::vector<edge> minSpanTree)
 {
+    std::cout << "MST:\n[";
     int i;
-    std::cout << "[";
-    for (i = 0; i < minSpanTree.size() - 2; i++)
-    {
-        std::cout << minSpanTree[i].parentVertex + 1 << "-" << minSpanTree[++i].parentVertex + 1 << ", ";
-    }
-    std::cout << minSpanTree[i].parentVertex + 1 << "-" << minSpanTree[++i].parentVertex + 1 << "]";
+    for (i = 0; i < minSpanTree.size() - 1; i++)
+        std::cout << minSpanTree[i].parentVertex + 1 << "-" << minSpanTree[i].nextVertex + 1 << ", ";
+    std::cout << minSpanTree[i].parentVertex + 1 << "-" << minSpanTree[i].nextVertex + 1 << "]";
 }
 
 /**
