@@ -37,11 +37,17 @@ void printQueue(std::priority_queue<edge, std::vector<edge>, edgeComparison> min
         minQueue.push(curr);
 }
 
+/**
+ * Print whether or not a vertex is part of the minimum spanning tree
+ * @param visitedVertices array of booleans representing if the vertex corresponding to an index has been visited or not
+ * @param length length of @param vistiedVertices
+ */
 void printVisitedVertices(bool vistedVertices[], int length)
 {
-    for (int i = 0; i < length; i++)
+    int i;
+    for (i = 0; i < length - 1; i++)
         std::cout << i << ": " << vistedVertices[i] << ", ";
-    std::cout << "\n";
+    std::cout << vistedVertices[i] << "\n";
 }
 
 /**
@@ -65,10 +71,7 @@ std::vector<edge> prim(std::vector<std::vector<int>> graph, int vertexCount)
     edge temp;
     while (!(minQueue.empty()))
     {
-        // printVisitedVertices(visitedVertices, sizeof(visitedVertices) / sizeof(bool));
-        // printQueue(minQueue);
         temp = minQueue.top();
-
         minQueue.pop();
 
         if (false == visitedVertices[temp.nextVertex])
@@ -79,9 +82,6 @@ std::vector<edge> prim(std::vector<std::vector<int>> graph, int vertexCount)
             std::vector<edge> nextVertex = toEdges(graph[temp.nextVertex], temp.nextVertex);
             for (edge edge : nextVertex)
                 minQueue.push(edge);
-
-            // printEdge(&temp);
-            // std::cout << "\n\n";
         }
     }
 
@@ -94,11 +94,19 @@ std::vector<edge> prim(std::vector<std::vector<int>> graph, int vertexCount)
  */
 void printMST(const std::vector<edge> minSpanTree)
 {
-    std::cout << "MST:\n[";
+    std::cout << "[";
     int i;
     for (i = 0; i < minSpanTree.size() - 1; i++)
-        std::cout << minSpanTree[i].parentVertex + 1 << "-" << minSpanTree[i].nextVertex + 1 << ", ";
-    std::cout << minSpanTree[i].parentVertex + 1 << "-" << minSpanTree[i].nextVertex + 1 << "]";
+    {
+        if (minSpanTree[i].parentVertex < minSpanTree[i].nextVertex)
+            std::cout << minSpanTree[i].parentVertex + 1 << "-" << minSpanTree[i].nextVertex + 1 << ", ";
+        else
+            std::cout << minSpanTree[i].nextVertex + 1 << "-" << minSpanTree[i].parentVertex + 1 << ", ";
+    }
+    if (minSpanTree[i].parentVertex < minSpanTree[i].nextVertex)
+        std::cout << minSpanTree[i].parentVertex + 1 << "-" << minSpanTree[i].nextVertex + 1 << "]";
+    else
+        std::cout << minSpanTree[i].nextVertex + 1 << "-" << minSpanTree[i].parentVertex + 1 << "]";
 }
 
 /**
