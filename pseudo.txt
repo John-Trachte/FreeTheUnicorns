@@ -1,7 +1,0 @@
-X create a minQueue
-X convert a vertex to edges
-X add vertex to a queue
-X select a vertex
-X if that vertex isn't part of the tree,
-X   add edge to mst
-X   add its next vertex to queue
