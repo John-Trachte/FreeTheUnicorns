@@ -1,2 +1,2 @@
-# CS3010assignment4
-Prim's algorithm
+# Free The Unicorns!
+Prim's Algorithm, as implemented for Algorithms homework
